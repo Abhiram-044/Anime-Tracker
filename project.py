@@ -5,9 +5,16 @@ import re
 from tabulate import tabulate
 import sys
 import pyfiglet
-
-
+'''
+CS50P Introduction to Programming with Python
+Final Project: Anime-Tracker
+Name: Abhiram Sadanand Chinta
+From: Solapur, Maharashtra, India
+Github: https://github.com/Abhiram-044
+LinkedIn: https://www.linkedin.com/in/abhiram-chinta-221806238/
+'''
 def main():
+    print(pyfiglet.figlet_format("Welcome To Anime-Tracker!!", font="slant"))
     # asks for user_id and if no user_id creates the csv file with the user_id as name
     q1 = input("Do you have a User ID?[yes(1) no(2)]: ")
     try:
