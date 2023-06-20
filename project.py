@@ -9,7 +9,7 @@ import pyfiglet
 
 def main():
     # asks for user_id and if no user_id creates the csv file with the user_id as name
-    q1 = input("Do you have a User ID?[yes(1) no(2)]")
+    q1 = input("Do you have a User ID?[yes(1) no(2)]: ")
     try:
         query = int(q1)
     except (ValueError):
@@ -57,7 +57,7 @@ def main():
                         continue
                     else:
                         statuses = ["Watching", "Completed", "Dropped", "Plan to Watch"]
-                        status = int(input("Enter Status[1.Watching, 2.Completed, 3.Dropped, 4.Plan to Watch]"))
+                        status = int(input("Enter Status[1.Watching, 2.Completed, 3.Dropped, 4.Plan to Watch]: "))
                         added = add_list(user_csv ,animes[id1-1], user_rate, statuses[status-1])
                         print(added)
             case "D":
