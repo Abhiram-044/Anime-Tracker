@@ -88,7 +88,7 @@ def main():
                         updated = update_status(user_csv, id2, statuses[status-1])
                         print(updated)
             case "E":
-                sys.exit(pyfiglet.figlet_format("Thanks for Using Anime-Tracker!!!", font="slant"))
+                sys.exit(pyfiglet.figlet_format("Thanks for Using Anime-Tracker!!", font="slant"))
             case _:
                 print("Enter Valid Input")
                 pass
