@@ -53,22 +53,48 @@ def main():
                 display(animes)
             case "A":
                 try:
-                    id1 = int(input("Enter Id of Anime to add: "))
+                    ids = map(int,(input("Enter Id of Anime to add: ").split()))
                 except (ValueError):
                     print("Enter Valid Id")
                     continue
                 else:
-                    anime = animes[id1-1]
-                    try:
-                        user_rate = int(input(f"Enter Rating for {anime['title']}: "))
-                    except (ValueError):
-                        print("Enter Valid rating[1-10]: ")
-                        continue
-                    else:
-                        statuses = ["Watching", "Completed", "Dropped", "Plan to Watch"]
-                        status = int(input("Enter Status[1.Watching, 2.Completed, 3.Dropped, 4.Plan to Watch]: "))
-                        added = add_list(user_csv ,animes[id1-1], user_rate, statuses[status-1])
-                        print(added)
+                    id_list = list(ids)
+                    statuses = ["Watching", "Completed", "Dropped", "Plan to Watch"]
+                    while True:
+                        for id1 in id_list:
+                            anime = animes[id1-1]
+                            present_id = is_anime_incsv(user_csv, anime)
+                            if present_id != 0:
+                                while True:
+                                    try:
+                                        status = int(input("Enter Updated Status[1.Watching, 2.Completed, 3.Dropped, 4.Plan to Watch]: "))
+                                        status1 = statuses[status-1]
+                                    except (ValueError, IndexError):
+                                        print("Enter Valid Input")
+                                        continue
+                                    else:
+                                        updated = update_status(user_csv, present_id, status1)
+                                        print(updated)
+                                        break
+                                continue
+                            while True:
+                                try:
+                                    user_rate = int(input(f"Enter Rating for {anime['title']}: "))
+                                except (ValueError):
+                                    print("Enter Valid rating[1-10]: ")
+                                    continue
+                                else:
+                                    try:
+                                        status = int(input("Enter Status[1.Watching, 2.Completed, 3.Dropped, 4.Plan to Watch]: "))
+                                        status1 = statuses[status-1]
+                                    except (ValueError, IndexError):
+                                        print("Enter Valid Input")
+                                        continue
+                                    else:
+                                        added = add_list(user_csv ,animes[id1-1], user_rate, statuses[status-1])
+                                        print(added)
+                                        break
+                        break
             case "D":
                 with open(user_csv, mode='r') as f:
                     data = csv.DictReader(f)
@@ -195,6 +221,15 @@ def update_status(user_csv, id, status):
         for row in updated_rows:
             writer.writerow(row)
     return f"Updated status of {id}ID: {status}"
+
+
+def is_anime_incsv(user_csv, anime):
+    with open(user_csv, "r") as f:
+        reader = csv.DictReader(f, fieldnames=["id", "title", "user_rate", "status"])
+        for _, row in enumerate(reader):
+            if row["title"] == anime["title"]:
+                return int(row["id"])
+    return 0
 
 if __name__ == "__main__":
     main()
