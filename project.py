@@ -1,12 +1,3 @@
-'''
-CS50P Introduction to Programming with Python
-Final Project: Anime-Tracker
-Name: Abhiram Sadanand Chinta
-From: Solapur, Maharashtra, India
-Github: https://github.com/Abhiram-044
-LinkedIn: https://www.linkedin.com/in/abhiram-chinta-221806238/
-'''
-
 from bs4 import BeautifulSoup
 import csv
 import requests
@@ -80,6 +71,8 @@ def main():
                             while True:
                                 try:
                                     user_rate = int(input(f"Enter Rating for {anime['title']}: "))
+                                    if user_rate > 10 or user_rate < 0:
+                                        raise ValueError
                                 except (ValueError):
                                     print("Enter Valid rating[1-10]: ")
                                     continue
