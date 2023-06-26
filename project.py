@@ -84,7 +84,7 @@ def main():
                                         print("Enter Valid Input")
                                         continue
                                     else:
-                                        added = add_list(user_csv ,animes[id1-1], user_rate, statuses[status-1])
+                                        added = add_list(user_csv ,animes[id1-1], user_rate, status1)
                                         print(added)
                                         break
                         break
@@ -102,11 +102,12 @@ def main():
                     statuses = ["Watching", "Completed", "Dropped", "Plan to Watch"]
                     try:
                         status = int(input("Enter updated Status[1.Watching, 2.Completed, 3.Dropped, 4.Plan to Watch]: "))
-                    except (ValueError):
+                        status1 = statuses[status-1]
+                    except (ValueError, IndexError):
                         print("Enter Valid Input")
                         continue
                     else:
-                        updated = update_status(user_csv, id2, statuses[status-1])
+                        updated = update_status(user_csv, id2, status1)
                         print(updated)
             case "E":
                 sys.exit(pyfiglet.figlet_format("Thanks for Using Anime-Tracker!!", font="slant"))
@@ -222,6 +223,7 @@ def is_anime_incsv(user_csv, anime):
         for _, row in enumerate(reader):
             if row["title"] == anime["title"]:
                 return int(row["id"])
+            
     return 0
 
 if __name__ == "__main__":

@@ -62,6 +62,10 @@ $ python project.py
 * ```is_anime_incsv(user_csv, anime)```:
     * This fuction checks if the anime is present in the users list.
     * If the anime is present in the list it returns the integer id of anime and then it is passes through ```update_status()``` and if anime not in list returns 0.
+
+* ```display(data)```:
+    * It displays the given data which is list of dictionaries in grid format using tabulate
+
 ---
 
 ## References
