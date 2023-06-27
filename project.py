@@ -18,6 +18,12 @@ def main():
     if query == 1:
         user_id = input("Enter User ID: ").replace(' ', '_')
         user_csv = user_id + '.csv'
+        try:
+            with open(user_csv, "r") as f:
+                print("User exists")
+        except FileNotFoundError:
+            print("User doesn't exist Creating new user...")
+            user_csv = create_user(user_id)
     elif query == 2:
         user_id = input("Enter New Username: ").replace(' ', '_')
         user_csv = create_user(user_id)
