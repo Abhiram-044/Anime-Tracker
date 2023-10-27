@@ -136,7 +136,7 @@ def top():
     animes = []
     id = 1
     for anime in anime_html:
-        title = anime.find("h3", class_="hoverinfo_trigger fl-l fs14 fw-b anime_ranking_h3").find_next("a").text # Scraps the Title of the show from the anchor tag present in h3
+        title = anime.find("h3", class_="fl-l fs14 fw-b anime_ranking_h3").find_next("a").text # Scraps the Title of the show from the anchor tag present in h3
         spans = anime.find_all("span") # finds all span tags
         for span in spans:
             classes = ' '.join(span.attrs["class"]) #Collects the class names of span tags
