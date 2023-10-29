@@ -267,7 +267,7 @@ def create_user(user_id, password):
 
 # Adds the anime to the user list with user_rating and status of anime
 def add_list(user_table, anime, user_rate, status):
-    count = conn.execute(f"SELECT COUNT (*) {user_table}")
+    count = conn.execute(f"SELECT COUNT (*) FROM {user_table};")
     for i in count:
         id = int(i[0]) + 1
     conn.execute(
