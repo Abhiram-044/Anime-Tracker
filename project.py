@@ -47,7 +47,7 @@ def main():
                 break
             else:
                 print("Enter Same Password for both")
-        user_table = create_user(user_table.lower(), password)
+        user_table = create_user(user_id.lower(), password)
     else:
         print("Enter Valid Input")
         pass
