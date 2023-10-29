@@ -252,7 +252,7 @@ def num(id):
 
 # Creates a user_table with the headers and file_name as user_id and returns the filename
 def create_user(user_id, password):
-    conn.execute(f"INSERT INTO {user_id} VALUES (?, ?);", (user_id, password))
+    conn.execute(f"INSERT INTO Users VALUES (?, ?);", (user_id, password))
     conn.commit()
     conn.execute(
         f"""CREATE TABLE {user_id}
