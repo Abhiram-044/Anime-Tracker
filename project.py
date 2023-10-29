@@ -257,6 +257,7 @@ def create_user(user_id, password):
     conn.execute(
         f"""CREATE TABLE {user_id}
             (ID INTEGER,
+            Title VARCHAR(250),
             User_Rate INTEGER,
             Status CHAR(15))"""
     )
