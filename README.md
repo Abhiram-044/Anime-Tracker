@@ -8,7 +8,7 @@ A command-line interface Anime-tracker using python for keeping the track of the
 ```
 $ pip install - requirements.txt
 ```
--Stable Internet Connection is required
+- Stable Internet Connection is required
 
 ---
 
@@ -22,6 +22,10 @@ $ pip install - requirements.txt
 * ```lxml```: for HTML parser
 
 * ```pyfiglet```: for rendering fancy text
+
+* ```maskpass```: for hiding the input for password
+
+* ```sqlite3```: for creating and storing in database
 
 ---
 
@@ -37,9 +41,9 @@ $ python project.py
 ```
 
 ## Documentation
-* ```create_user(user_id)```:
-    * In this function a new user_id is passed as an argument to create a csv file of same name if there is a space in the name it is replaced with '_'.
-    * While Creating the csv files the headers are writen in the .csv file.
+* ```create_user(user_id, password)```:
+    * In this function a new user_id and password is passed as an argument to create a table of same name in database.db and user_id, password are stored in Users table.
+    * After Creating the User the column names are give as per the table.
 
 * ```top()```:
     * In this function this a GET request is sent to this website [https://myanimelist.net/topanime.php].
@@ -51,15 +55,15 @@ $ python project.py
     * Then the top 15 results are scraped to get the details['id', 'title', 'rating'] using ```BeautifulSoup()```.
     * The results are stores as dict and all the results are returned in a list of dict.
 
-* ```add_list(user_csv, anime, user_rate, status)```:
-    * In this function a string user_csv, anime, user_rate, status is passes where user_csv is the file where the data needs to be added, anime is the that needs to be stored in user_csv, user_rate is the user_rating for the show, status is string that can be either if ['Watching', 'Completed', 'Dropped', 'Plan to Watch'].
-    * The details as per user input are stored then a dict that has been stored in csv is returned.
+* ```add_list(user_table, anime, user_rate, status)```:
+    * In this function user_table, anime, user_rate, status is passes where user_table is the table name where the data needs to be added, anime is the that needs to be stored in user_table, user_rate is the user_rating for the show, status is string that can be either if ['Watching', 'Completed', 'Dropped', 'Plan to Watch'].
+    * The details as per user input are stored then a dict with info that has been stored in table is returned.
 
-* ```update_status(user_csv, id, status)```:
-    * In this function the status of the given id in user_csv is changed as per input.
+* ```update_status(user_table, id, status)```:
+    * In this function the status of the given id in user_table is changed as per input.
     * After Changing the status the Updated status of the Id is returned.
 
-* ```is_anime_incsv(user_csv, anime)```:
+* ```is_anime_in_table(user_table, anime)```:
     * This fuction checks if the anime is present in the users list.
     * If the anime is present in the list it returns the integer id of anime and then it is passes through ```update_status()``` and if anime not in list returns 0.
 
@@ -73,3 +77,5 @@ $ python project.py
 * [Tabulate](https://pypi.org/project/tabulate/)
 * [csv](https://docs.python.org/3/library/csv.html)
 * [pyfiglet](https://www.javatpoint.com/python-pyfiglet-module)
+* [sqlite3](https://www.tutorialspoint.com/sqlite/sqlite_python.htm)
+* [maskpass](https://pypi.org/project/maskpass/)
