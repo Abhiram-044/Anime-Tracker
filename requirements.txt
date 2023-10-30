@@ -3,3 +3,5 @@ requests
 tabulate
 pyfiglet
 lxml
+sqlite3
+maskpass
