@@ -58,6 +58,7 @@ def main():
         {"action": "add anime to list", "key": "A"},
         {"action": "display your list", "key": "D"},
         {"action": "update status of anime", "key": "U"},
+        {"action": "Recommend based off last watched", "key": "R"},
         {"action": "exit", "key": "E"},
     ]
     # Displays the queries(options) in tabulate and executes actions as per the input and starts over if any ERROR encountered
@@ -137,7 +138,7 @@ def main():
                         break
             case "D":
                 data = list()
-                cursor = conn.execute(f"SELECT * FROM {user_id}")
+                cursor = conn.execute(f"SELECT * FROM {user_table}")
                 for i in cursor:
                     data.append(
                         {
@@ -175,6 +176,18 @@ def main():
                         "Thanks for Using Anime-Tracker!!", font="slant"
                     )
                 )
+            case "R":
+                row = conn.execute(
+                    f"""
+                    SELECT * FROM {user_table}
+                    ORDER BY ID DESC
+                    LIMIT 1;
+                    """
+                    )
+                for i in row:
+                    anime_name = str(i[1])
+                recommendations = find_similar_animes(anime_name)
+                display(recommendations)
             case _:
                 print("Enter Valid Input")
                 pass
