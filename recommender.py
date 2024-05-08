@@ -3,6 +3,9 @@ import numpy as np
 import pickle
 import h5py
 from tabulate import tabulate
+import warnings
+
+warnings.simplefilter('ignore')
 
 # Function to extract weights from HDF5 file for a given layer
 def extract_weights(file_path, layer_name):
