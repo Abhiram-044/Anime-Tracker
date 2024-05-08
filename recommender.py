@@ -20,7 +20,7 @@ def extract_weights(file_path, layer_name):
     raise KeyError(f"Unable to find weights for layer '{layer_name}' in the HDF5 file.")
 
 # File path for the HDF5 file containing anime weights
-file_path = 'models/myanimeweights.h5'
+file_path = '../models/myanimeweights.h5'
 
 # Function to find similar animes based on provided anime name
 def find_similar_animes(name, n=10):
@@ -28,11 +28,11 @@ def find_similar_animes(name, n=10):
     anime_weights = extract_weights(file_path, 'anime_embedding/anime_embedding/embeddings:0')
 
     # Load anime encoder from pickle file
-    with open('models/anime_encoder.pkl', 'rb') as file:
+    with open('../models/anime_encoder.pkl', 'rb') as file:
         anime_encoder = pickle.load(file)
 
     # Load anime dataset from pickle file
-    with open('models/anime-dataset-2023.pkl', 'rb') as file:
+    with open('../models/anime-dataset-2023.pkl', 'rb') as file:
         df_anime = pickle.load(file)
 
     # Replace "UNKNOWN" values with empty string
@@ -74,10 +74,6 @@ def find_similar_animes(name, n=10):
                     "Score": score,
                 } 
             )
-    
+    SimilarityArr = list(reversed(SimilarityArr))
     # Return the array containing similar animes
     return SimilarityArr
-
-# Find similar animes to 'Bleach' and print them in a tabulated format
-similar = find_similar_animes('Bleach')
-print(tabulate(list(reversed(similar)), headers="keys", tablefmt="grid"))
