@@ -6,6 +6,7 @@ import re
 from tabulate import tabulate
 import sys
 import pyfiglet
+from recommender import find_similar_animes
 
 # Connects to the database
 conn = sqlite3.connect("database.db")
@@ -83,7 +84,7 @@ def main():
                     while True:
                         for id1 in id_list:
                             anime = animes[id1 - 1]
-                            present_id = is_anime_incsv(user_table, anime)
+                            present_id = is_anime_in_table(user_table, anime)
                             if present_id != 0:
                                 while True:
                                     try:
@@ -291,7 +292,7 @@ def update_status(user_table, id, status):
     return f"Updated status of {id}ID: {status}"
 
 
-def is_anime_incsv(user_table, anime):
+def is_anime_in_table(user_table, anime):
     cursor = conn.execute(f"SELECT * FROM {user_table};")
     for x in cursor:
         if str(x[1]) == anime["title"]:
